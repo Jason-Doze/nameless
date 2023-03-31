@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script will log in the address doze-pi.attlocal.net raspberry-pi ubuntu server, copy the files over, excute the script, and SSH into the server.
+# This script will log in the address of a raspberry-pi 400 ubuntu server, copy the files over the Pi, excute the script, and SSH into the server.
 
 echo "Validate Pi server is running\n"
 while true
