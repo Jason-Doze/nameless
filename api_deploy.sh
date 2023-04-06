@@ -1,7 +1,6 @@
-#/bin/bash
+#!/bin/bash
 
 # clones the api from github using HTTPS, install all deps
-
 
 # Check for git and clone
 if ( which git > /dev/null)
@@ -10,7 +9,15 @@ then
 else  
   echo "install git"
   sudo apt install git
-  git clone https://github.com/Jason-Doze/expressapi.git
+fi
+
+# Clone the repo
+if [ -d expressapi ] 
+then
+  echo -e "\n==== Repo already cloned ====\n"
+else 
+  echo -e "\n==== Cloning repo ====\n"
+  git clone https://github.com/Jason-Doze/expressapi.git /home/jasondoze/expressapi
 fi
 
 # Install NodeJS 
@@ -29,35 +36,29 @@ then
   echo -e "\n==== Node_modules installed ====\n"
 else 
   echo -e "\n==== Installing node_modules ====\n"
-  npm install 
+  cd /home/jasondoze/expressapi && npm install 
 fi
 
-# Run NPM build
-# if [ -d build ] 
-# then
-#   echo -e "\n==== NPM build complete ====\n"
-# else 
-#   echo -e "\n==== Running NPM build ====\n"
-#  npm run build 
-# fi
-
 # Copy service file and reload daemon
-# if [ -f /lib/systemd/system/crownapp.service ] 
-# then
-#   echo -e "\n==== Service file present ====\n"
-# else 
-#   echo -e "\n==== Copying crownapp.service ====\n"
-#   sudo cp crownapp.service /lib/systemd/system/ && sudo systemctl daemon-reload
-# fi
+if [ -f /lib/systemd/system/api.service ] 
+then
+  echo -e "\n==== Service file present ====\n"
+else 
+  echo -e "\n==== Copying api.service ====\n"
+  sudo cp /home/jasondoze/expressapi/api.service /lib/systemd/system/ && sudo systemctl daemon-reload
 
-# # Restart the crownapp service
-# if ( systemctl is-active crownapp.service ) 
-# then
-#   echo -e "\n==== Crownapp running ====\n"
-# else 
-#   echo -e "\n==== Starting crownapp ====\n"
-#   sudo systemctl restart crownapp.service
-# fi
+fi
+
+
+# Restart the express api service
+if ( systemctl is-active api.service ) 
+then
+  echo -e "\n==== Chucki running ====\n"
+else 
+  echo -e "\n==== Starting Chuckie ====\n"
+  sudo systemctl restart api.service
+fi
+
 
 echo -e "\n==== Install complete ====\n"
 
