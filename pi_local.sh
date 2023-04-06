@@ -15,7 +15,6 @@ do
   fi
 done
 
-
 # Use rsync to copy files to the Pi server
 echo -e "\n==== Copying files to Pi ====\n"
 rsync -av -e "ssh -o StrictHostKeyChecking=no -i ./id_ed25519" --delete --exclude={'.git','.gitignore','id_ed25519*','commands.txt','images','README.md'} $(pwd) $USER@$( host -t A raspberry | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}'):/home/jasondoze
@@ -24,10 +23,6 @@ rsync -av -e "ssh -o StrictHostKeyChecking=no -i ./id_ed25519" --delete --exclud
 echo -e "\n==== Executing install script ====\n"
 ssh -o StrictHostKeyChecking=no -i ./id_ed25519 $USER@$( host -t A raspberry | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}') 'cd nameless && bash nginx_install.sh && bash api_deploy.sh'
 
-# SSH into VM
+# SSH into Pi server
 echo -e "\n==== SSH into Pi ====\n"
 ssh -o StrictHostKeyChecking=no -i ./id_ed25519 $USER@$( host -t A raspberry | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}')
-
-
-
-
