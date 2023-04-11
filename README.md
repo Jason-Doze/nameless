@@ -29,7 +29,7 @@ Open Raspberry Pi Imager application.
 
 * Enable "Set username and password": Add username &rarr; Deselect "Set username and password"
 
-![image](./images/optionstwo.png)
+![image](./images/advanced_two.png)
 
 * Select Configure wireless LAN: Add SSID ( Service Set Identifier ): the unique identifier that is assigned to you wifi. Aka wifi name.
 * Add Wifi Password
