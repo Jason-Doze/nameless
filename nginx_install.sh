@@ -40,14 +40,24 @@ else
     sudo systemctl start nginx
 fi
 
-# Copy nginx configuration file to /etc/nginx directory
-if [ -f /etc/nginx/nginx.conf ]
+# Copy nginx configuration file to /etc/nginx/sites-available directory
+if [ -f /etc/nginx/sites-available/nginx.conf ]
 then
   echo -e "\n==== nginx.conf present ====\n"
 else
   echo -e "\n==== Copying nginx.conf ====\n"
-  sudo cp nginx.conf /etc/nginx/
+  sudo cp nginx.conf /etc/nginx/sites-available/
 fi
+
+# Create a symbolic link to enable the configuration
+if [ -f /etc/nginx/sites-enabled/nginx.conf ]
+then
+  echo -e "\n==== nginx.conf already enabled ====\n"
+else
+  echo -e "\n==== Enabling nginx.conf ====\n"
+  sudo ln -s /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled/
+fi
+
 
 # Restart nginx service
 echo -e "\n==== Restarting nginx service ====\n"
