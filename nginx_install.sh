@@ -24,7 +24,7 @@ else
 
     # To set up the apt repository for stable nginx packages, run the following command:curl
     echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] \
-    http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" \
+    http://nginx.org/packages/ubuntu $(lsb_release -cs) nginx" \
         | sudo tee /etc/apt/sources.list.d/nginx.list
 
     # Set up repository pinning to prefer our packages over distribution-provided ones:
@@ -57,7 +57,6 @@ else
   echo -e "\n==== Enabling nginx.conf ====\n"
   sudo ln -s /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled/
 fi
-
 
 # Restart nginx service
 echo -e "\n==== Restarting nginx service ====\n"
