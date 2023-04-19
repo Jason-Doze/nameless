@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# clones the api from github using HTTPS, install all deps
+# This script clones the expressapi repo from github using HTTPS, and installs dependencies
+
+sudo apt install net-tools
 
 # Check for git and clone
 if ( which git > /dev/null)
@@ -38,36 +40,4 @@ else
   echo -e "\n==== Installing node_modules ====\n"
   cd /home/jasondoze/expressapi && npm install 
 fi
-
-# Copy service file and reload daemon
-if [ -f /lib/systemd/system/api.service ] 
-then
-  echo -e "\n==== Service file present ====\n"
-else 
-  echo -e "\n==== Copying api.service ====\n"
-  sudo cp /home/jasondoze/expressapi/api.service /lib/systemd/system/ && sudo systemctl daemon-reload
-
-fi
-
-
-# Restart the express api service
-if ( systemctl is-active api.service ) 
-then
-  echo -e "\n==== Chucki running ====\n"
-else 
-  echo -e "\n==== Starting Chuckie ====\n"
-  sudo systemctl restart api.service
-fi
-
-
-echo -e "\n==== Install complete ====\n"
-
-echo -e "\033[31m                                                                                 \033[0m"
-echo -e "\033[31m   _________  .__                     __    .__                                  \033[0m"
-echo -e "\033[31m   \_   ___ \ |  |__   __ __   ____  |  | __|__|  ____                           \033[0m"           
-echo -e "\033[31m   /    \  \/ |  |  \ |  |  \_/ ___\ |  |/ /|  |_/ __ \                          \033[0m" 
-echo -e "\033[31m   \     \____|   Y  \|  |  /\  \___ |    < |  |\  ___/                          \033[0m"   
-echo -e "\033[31m    \______  /|___|  /|____/  \___  >|__|_ \|__| \___  >                         \033[0m"
-echo -e "\033[31m           \/      \/             \/      \/         \/                          \033[0m"
-echo -e "\033[31m                                                                                 \033[0m"
 
