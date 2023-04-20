@@ -40,15 +40,21 @@ else
     sudo systemctl start nginx
 fi
 
-# Copy nginx configuration file to /etc/nginx/
-if [ -f /etc/nginx/nginx.conf ]
+# Copy nginx configuration file to /etc/nginx/conf.d
+if [ -f /etc/nginx/conf.d/nginx.conf ]
 then
   echo -e "\n==== Nginx.conf present ====\n"
 else
   echo -e "\n==== Copying nginx.conf ====\n"
-  sudo cp nginx.conf /etc/nginx/
+  sudo cp /home/jasondoze/nameless/nginx.conf /etc/nginx/conf.d/
 fi
-  
+
+# Create a new configuration file for your application in the /etc/nginx/sites-available directory
+sudo cp /home/jasondoze/nameless/nginx.conf /etc/nginx/sites-available/namelessapi
+
+# Create a symbolic link to the configuration file in the /etc/nginx/sites-enabled directory
+sudo ln -s /etc/nginx/sites-available/namelessapi /etc/nginx/sites-enabled/
+
 # Restart nginx service
 echo -e "\n==== Restarting nginx service ====\n"
 sudo systemctl restart nginx
