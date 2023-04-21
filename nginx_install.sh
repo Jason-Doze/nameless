@@ -40,20 +40,32 @@ else
     sudo systemctl start nginx
 fi
 
-# Copy nginx configuration file to /etc/nginx/conf.d
-if [ -f /etc/nginx/conf.d/nginx.conf ]
+# Copy nameless_api.conf to /etc/nginx/sites-available directory.
+if [ -f /etc/nginx/sites-available/namelessapi ]
 then
-  echo -e "\n==== Nginx.conf present ====\n"
+    echo -e "\n==== Nameless_api.conf present in sites-available ====\n"
 else
-  echo -e "\n==== Copying nginx.conf ====\n"
-  sudo cp /home/jasondoze/nameless/nginx.conf /etc/nginx/conf.d/
+    echo -e "\n==== Copying nameless_api.conf to sites-available ====\n"
+    sudo cp /home/jasondoze/nameless/nameless_api.conf /etc/nginx/sites-available/namelessapi
 fi
 
-# Create a new configuration file for your application in the /etc/nginx/sites-available directory
-sudo cp /home/jasondoze/nameless/nginx.conf /etc/nginx/sites-available/namelessapi
+# Remove symlink to Nginx default in /etc/nginx/sites-enabled directory.
+if [ -L /etc/nginx/sites-enabled/default ]
+then
+    echo -e "\n==== Removing default symlink ====\n"
+    sudo rm /etc/nginx/sites-enabled/default
+else
+    echo -e "\n==== Default symlink not present ====\n"
+fi
 
-# Create a symbolic link to the configuration file in the /etc/nginx/sites-enabled directory
-sudo ln -s /etc/nginx/sites-available/namelessapi /etc/nginx/sites-enabled/
+# Create symlink in /etc/nginx/sites-enabled directory.
+if [ -L /etc/nginx/sites-enabled/namelessapi ]
+then
+    echo -e "\n==== Symlink present ====\n"
+else
+    echo -e "\n==== Creating symlink ====\n"
+    sudo ln -s /etc/nginx/sites-available/namelessapi /etc/nginx/sites-enabled/
+fi
 
 # Restart nginx service
 echo -e "\n==== Restarting nginx service ====\n"
