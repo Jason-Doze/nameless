@@ -8,7 +8,7 @@ then
   echo -e "\n==== Service file present ====\n"
 else 
   echo -e "\n==== Copying api.service ====\n"
-  sudo cp /home/jasondoze/expressapi/api.service /lib/systemd/system/ && sudo systemctl daemon-reload
+  sudo cp /home/jasondoze/expressapi/api.service /etc/systemd/system/ && sudo systemctl daemon-reload
 fi
 
 # Restart express api.service
