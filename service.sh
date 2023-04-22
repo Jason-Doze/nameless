@@ -3,7 +3,7 @@
 # This script copies the service file from expressapi repo to systemd/system directory.
 
 # Copy service file and reload daemon
-if [ -f /lib/systemd/system/api.service ] 
+if [ -f /etc/systemd/system/api.service ] 
 then
   echo -e "\n==== Service file present ====\n"
 else 
