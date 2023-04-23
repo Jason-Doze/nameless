@@ -21,7 +21,7 @@ rsync -av -e "ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519" --delete --e
 
 # Use SSH to execute commands on the Pi server
 echo -e "\n==== Executing install script ====\n"
-ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 "$USER"@$PI_HOST 'cd nameless && bash nginx_install.sh && bash api_deploy.sh && bash service.sh'
+ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 "$USER"@$PI_HOST 'cd nameless && bash docker_install.sh && bash docker_build.sh'
 
 # SSH into Pi server
 echo -e "\n==== SSH into Pi ====\n"
