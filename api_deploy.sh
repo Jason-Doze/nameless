@@ -19,7 +19,7 @@ then
   echo -e "\n==== Repo already cloned ====\n"
 else 
   echo -e "\n==== Cloning repo ====\n"
-  git clone https://github.com/Jason-Doze/expressapi.git /home/jasondoze/expressapi
+  git clone git@github.com:Jason-Doze/expressapi.git /home/jasondoze/expressapi
 fi
 
 # Install NodeJS 
