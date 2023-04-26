@@ -41,8 +41,9 @@ Open Raspberry Pi Imager application.
 
 Run the script using the following command:
 ```shell
-bash pi_deploy.sh
+PI_HOST=$(dig +short pi | tail -n1) bash pi_local.sh
 ```
+
 
 ## Requirements
 * Raspberry Pi.
